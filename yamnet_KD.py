@@ -88,7 +88,7 @@ _YAMNET_LAYER_DEFS = [
     (_separable_conv, [3, 3], 1,  64),
     (_separable_conv, [3, 3], 1,  64),
     (_separable_conv, [3, 3], 2, 128),
-    (_separable_conv, [3, 3], 1, 1024)
+    (_separable_conv, [3, 3], 1, 128)
 ]
 
 
