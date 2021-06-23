@@ -88,7 +88,7 @@ _YAMNET_LAYER_DEFS = [
     (_separable_conv, [3, 3], 1,  64),
     (_separable_conv, [3, 3], 1,  64),
     (_separable_conv, [3, 3], 2, 128),
-    (_separable_conv, [3, 3], 1, 128)
+    (_separable_conv, [3, 3], 1, 1024)
 ]
 
 
@@ -100,9 +100,12 @@ def yamnet(features, params):
   for (i, (layer_fun, kernel, stride, filters)) in enumerate(_YAMNET_LAYER_DEFS):
     net = layer_fun('layer{}'.format(i + 1), kernel, stride, filters, params)(net)
   embeddings = layers.GlobalAveragePooling2D()(net)
-  logits = layers.Dense(units=params.num_classes, use_bias=True)(embeddings)
-  predictions = layers.Activation(activation=params.classifier_activation)(logits)
-  return predictions, embeddings
+  norm = layers.BatchNormalization()(embeddings),
+  gru = layers.GRU(20)(norm)
+  logits = layers.Dense(10),
+  #logits = layers.Dense(units=params.num_classes, use_bias=True)(embeddings)
+  #predictions = layers.Activation(activation=params.classifier_activation)(logits)
+  return logits
 
 
 def yamnet_frames_model(params):
