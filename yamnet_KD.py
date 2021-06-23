@@ -101,8 +101,8 @@ def yamnet(features, params):
     net = layer_fun('layer{}'.format(i + 1), kernel, stride, filters, params)(net)
   embeddings = layers.GlobalAveragePooling2D()(net)
   norm = layers.BatchNormalization()(embeddings),
-  gru = layers.GRU(20)(norm)
-  logits = layers.Dense(10),
+  gru = layers.Dense(20)(norm)
+  logits = layers.Dense(10)(gru),
   #logits = layers.Dense(units=params.num_classes, use_bias=True)(embeddings)
   #predictions = layers.Activation(activation=params.classifier_activation)(logits)
   return logits
