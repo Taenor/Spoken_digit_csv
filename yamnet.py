@@ -125,7 +125,7 @@ def yamnet_frames_model(params):
   predictions, embeddings = yamnet(features, params)
   frames_model = Model(
       name='yamnet_frames', inputs=features,
-      outputs=[predictions, embeddings, log_mel_spectrogram])
+      outputs=[predictions, embeddings])
   return frames_model
 
 
