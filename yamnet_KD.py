@@ -125,10 +125,10 @@ def yamnet_frames_model(params):
   # log_mel_spectrogram, features = features_lib.waveform_to_log_mel_spectrogram_patches(
   #     waveform_padded, params)
   features = layers.Input(batch_shape=(1,96,64), dtype=tf.float32)
-  predictions, embeddings = yamnet(features, params)
+  predictions = yamnet(features, params)
   frames_model = Model(
       name='yamnet_frames', inputs=features,
-      outputs=[predictions, embeddings])
+      outputs=[predictions])
   return frames_model
 
 
